@@ -9,6 +9,7 @@ const cors = require('cors');
 // const fs = require('fs');
 
 const app = express();
+
 require('dotenv').config();
 
 const port = process.env.port;
@@ -20,7 +21,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({ origin: '*' }));
 
 app.post('/', async (req, res) => {
     const { person } = req.body;
