@@ -9,9 +9,9 @@ const cors = require('cors');
 // const fs = require('fs');
 
 const app = express();
-const port = 3001;
-
 require('dotenv').config();
+
+const port = process.env.port;
 
 const configuration = new Configuration({
     organization: process.env.organization,
@@ -73,6 +73,7 @@ app.listen(port, () => {
 // }
 
 // server = https.createServer(options, app);
+// server = https.createServer(app);
 
 // server.listen(port, () => {
 //     console.log(`Example app listening at https://localhost:${port}`);
