@@ -32,7 +32,7 @@ app.post('/', async (req, res) => {
     let conversation = `Pretend you are ${person}. 
     Reply as if you are ${mood ? mood : person}.
     While replying, keep the context of the whole conversation.
-    Your reply should be in under ${tokens} tokens.
+    Your reply should be in under ${tokens} tokens with complete sentences.
     
     ${person}: How're you?
     Person: Cool, what about you?
