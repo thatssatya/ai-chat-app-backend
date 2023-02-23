@@ -40,23 +40,28 @@ app.post('/', async (req, res) => {
     Person: ${message}
     ${person}:`;
 
-    const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: conversation,
-        max_tokens: 30,
-        temperature: 0,
-    });
+    try {
+        const response = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: conversation,
+            max_tokens: 30,
+            temperature: 0,
+        });
 
-    console.log('\nChat session with: ' + person);
-    if (mood)
-        console.log('Mood: ' + mood);
-    console.log('Message: ' + message);
+        console.log('\nChat session with: ' + person);
+        if (mood)
+            console.log('Mood: ' + mood);
+        console.log('Message: ' + message);
 
-    if (response.data) {
-        if (response.data.choices[0].text) {
-            res.json({ message: response.data.choices[0].text.trim() });
-            console.log('Reply: ' + response.data.choices[0].text.trim());
+        if (response.data) {
+            if (response.data.choices[0].text) {
+                res.json({ message: response.data.choices[0].text.trim() });
+                console.log('Reply: ' + response.data.choices[0].text.trim());
+            }
         }
+    } catch (err) {
+        res.json({ message: 'Having a break right now, brb in some time...' });
+        console.log(err);
     }
 });
 
