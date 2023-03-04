@@ -1,15 +1,9 @@
 const OpenAI = require('openai');
 const { Configuration, OpenAIApi } = OpenAI;
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
-// const https = require('https');
-// const fs = require('fs');
-
 const app = express();
-
 require('dotenv').config();
 
 const port = process.env.port;
@@ -48,15 +42,9 @@ app.post('/', async (req, res) => {
             temperature: 0,
         });
 
-        console.log('\nChat session with: ' + person);
-        if (mood)
-            console.log('Mood: ' + mood);
-        console.log('Message: ' + message);
-
         if (response.data) {
             if (response.data.choices[0].text) {
                 res.json({ message: response.data.choices[0].text.trim() });
-                console.log('Reply: ' + response.data.choices[0].text.trim());
             }
         }
     } catch (err) {
@@ -72,15 +60,3 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Backend server listening at http://localhost:${port}`);
 });
-
-// var options = {
-//     key: fs.readFileSync('./tls.key'),
-//     cert: fs.readFileSync('./tls.crt'),
-// }
-
-// server = https.createServer(options, app);
-// server = https.createServer(app);
-
-// server.listen(port, () => {
-//     console.log(`Example app listening at https://localhost:${port}`);
-// });
