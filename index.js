@@ -23,6 +23,8 @@ app.post('/', async (req, res) => {
     const { message } = req.body;
     const { tokens } = req.body ? req.body : 30;
 
+    console.log(`User wants to have conversation with ${person} in ${mood} mood: ${message}`);
+
     let conversation = `Pretend you are ${person}. 
     Reply as if you are ${mood ? mood : person}.
     While replying, keep the context of the whole conversation.
