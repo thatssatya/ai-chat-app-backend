@@ -12,10 +12,12 @@ async function handlePost(req, res) {
         const { person, mood, message, tokens } = req.body;
         console.log(`User wants to have conversation with ${person} ${mood ? `in ${mood} mood` : ''}\n\nUser: ${message}`);
 
+        const maxTokens = tokens ? Math.min(Number(tokens), Number(process.env.maxTokens)) : Number(process.env.maxTokens);
+
         const response = await openai.createCompletion({
             model: process.env.openaiModel,
-            prompt: buildConversation(person, mood, message, tokens),
-            max_tokens: 30,
+            prompt: buildConversation(person, mood, message, maxTokens),
+            max_tokens: maxTokens,
             temperature: 0,
         });
 
