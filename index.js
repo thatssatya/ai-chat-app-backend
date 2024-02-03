@@ -23,7 +23,7 @@ app.post('/', async (req, res) => {
     const { message } = req.body;
     const { tokens } = req.body ? req.body : 30;
 
-    console.log(`User wants to have conversation with ${person} in ${mood} mood: ${message}`);
+    console.log(`User wants to have conversation with ${person} in ${mood} mood\n\nUser: ${message}`);
 
     let conversation = `Pretend you are ${person}. 
     Reply as if you are ${mood ? mood : person}.
@@ -46,7 +46,9 @@ app.post('/', async (req, res) => {
 
         if (response.data) {
             if (response.data.choices[0].text) {
-                res.json({ message: response.data.choices[0].text.trim() });
+                const msg = response.data.choices[0].text.trim();
+                console.log(`${person}: ${msg}`)
+                res.json({ message: msg });
             }
         }
     } catch (err) {
