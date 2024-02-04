@@ -8,7 +8,8 @@ app.use(bodyParser.json());
 
 app.use((req, res, next) => {
     const origin = req.headers.origin || req.headers.referer;
-    if (origin && origin.startsWith(process.env.allowedOrigin)) {
+    const allowedOrigin = process.env.allowedOrigin;
+    if (allowedOrigin === '*' || (origin && origin.startsWith(process.env.allowedOrigin))) {
         console.log(`Accessing from: ${origin}`)
         next();
     } else {
