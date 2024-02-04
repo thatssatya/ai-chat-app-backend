@@ -5,7 +5,7 @@ const routes = require('./routes');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: process.env.allowedOrigin }));
 
 app.use('/', routes);
 
