@@ -1,11 +1,4 @@
-const { OpenAIApi, Configuration } = require('./openai');
-
-const configuration = new Configuration({
-    organization: process.env.organization,
-    apiKey: process.env.apiKey,
-});
-
-const openai = new OpenAIApi(configuration);
+const openai = require('./openai');
 
 async function handlePost(req, res) {
     try {
