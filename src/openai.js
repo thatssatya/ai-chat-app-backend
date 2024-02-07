@@ -1,3 +1,10 @@
-const OpenAI = require('openai');
+const { OpenAIApi, Configuration } = require('openai');
 
-module.exports = OpenAI;
+const configuration = new Configuration({
+    organization: process.env.organization,
+    apiKey: process.env.apiKey,
+});
+
+const openai = new OpenAIApi(configuration);
+
+module.exports = openai;
